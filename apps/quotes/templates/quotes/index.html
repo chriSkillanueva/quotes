@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login/Registration</title>
+    </head>
+    <body>
+        <div id="container">
+            <h1>Welcome</h1>
+            <div id="Register">
+                <h1><u>Register</u></h1>
+                <form action='/register' method='post'>
+                    {% csrf_token %}
+                    {% for x in request.session.errors.name_error %}
+                        <p class="red">{{x}}</p>
+                    {% endfor %}
+                    <label><u>Name:</u></label><input type='text' name='name'>
+                    <br><br>
+                    {% for x in request.session.errors.alias_error %}
+                        <p class="red">{{x}}</p>
+                    {% endfor %}
+                    <label><u>Alias:</u></label><input type='text' name='alias'>
+                    <br><br>
+                    {% for x in request.session.errors.email_error %}
+                        <p class="red">{{x}}</p>
+                    {% endfor %}
+                    <label><u>Email:</u></label><input type='text' name='email'>
+                    <br><br>
+                    {% for x in request.session.errors.password_error %}
+                        <p class="red">{{x}}</p>
+                    {% endfor %}
+                    <label><u>Password:</u></label><input type='password' name='password'>
+                    <br><br>
+                    {% for x in request.session.errors.confirm_error %}
+                        <p class="red">{{x}}</p>
+                    {% endfor %}
+                    <label><u>Confirm Password:</u></label><input type='password' name='confirm'>
+                    <br><br>
+                    {% for x in request.session.errors.dob_error %}
+                        <p class="red">{{x}}</p>
+                    {% endfor %}
+                    <label><u>Date of Birth:</u></label><input type='date' name='dob'>
+                    <br><br>
+                    <input type='submit' value='Register'>
+                </form>
+            </div>
+            <div id="Login">
+                <h1><u>Login</u></h1>
+                <form action='/login' method='post'>
+                    {% csrf_token %}
+                    {% for x in request.session.errors.login_email_error %}
+                        <p class="red">{{x}}</p>
+                    {% endfor %}
+                <label><u>Email:</u></label><input type='text' name='login_email'>
+                <br><br>
+                {% for x in request.session.errors.login_password_error %}
+                        <p class="red">{{x}}</p>
+                    {% endfor %}
+                <label><u>Password:</u></label><input type='password' name='login_password'>
+                <br><br>
+                <input type='submit' value='Login'>
+            </div>
+        </div>
+    </body>
+</html>

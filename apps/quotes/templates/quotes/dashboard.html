@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Quotes</title>
+    </head>
+    <body>
+        {% for x in info %}
+        <h3>Hello, {{x.name}}!</h3>
+        {% endfor %}
+        <br>
+        <a href="/logout">Logout</a>
+        <hr>
+        <h3><u>Quotable Quotes</u></h3>
+        {{request.session.favorite_error}}
+        {% for x in quotes %}
+            <p><b>{{x.author}}:</b> {{x.message}}</p>
+            <p>Posted by:<a href="/users/{{x.user.id}}"> {{x.user.name}}</a></p>
+            <a href="/addfav/{{x.id}}">Add to My List</a>
+        {% endfor %}
+        <hr>
+        <h3><u>Your Favorites</u></h3>
+        {% for y in favorites %}
+            <p><b>{{y.quote.author}}:</b> {{y.quote.message}}</p>
+            <p>Posted by:<a href="/users/{{y.user.id}}"> {{y.user.name}}</a></p>
+            <a href="/removefav/{{y.quote.id}}">Remove From My List</a>
+        {% endfor %}
+        <br><hr>
+        <h3><u>Contribute a Quote</u></h3>
+            <form action='/contribute' method='post'>
+                {% csrf_token %}
+                {% for x in request.session.contribute_errors.author_error %}
+                    <p class="red">{{x}}</p>
+                {% endfor %}
+                <label><u>Quoted By:</u></label><input type='text' name='author'>
+                <br><br>
+                {% for x in request.session.contribute_errors.message_error %}
+                    <p class="red">{{x}}</p>
+                {% endfor %}
+                <label><u>Message:</u></label><textarea name="message"></textarea>
+                <br><br>
+                <input type='submit' value='Submit'>
+            </form>
+    </body>
+</html>

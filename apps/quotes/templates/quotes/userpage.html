@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Quotes</title>
+    </head>
+    <body>
+        {% for x in details %}
+            <a href="/quotes">Home</a>
+            <a href="/logout">Logout</a>
+            <br><hr><br>
+            <h3>Posts by {{x.name}}</h3>
+            <h4>Count: {{count}}</h4>
+            <br><hr><br>
+        {% endfor %}
+        {% for x in quotes %}
+        <p><b><u>{{x.author}}:</u></b> {{x.message}}</p>
+        <br>
+        {% endfor %}
+    </body>
+</html>
